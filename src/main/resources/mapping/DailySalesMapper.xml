@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crud.demo.mapper.DailySalesMapper">
+
+    <resultMap id="BaseResultMap" type="com.crud.demo.entity.DailySales" >
+        <result column="id" property="id" />
+        <result column="good_id" property="goodId" />
+        <result column="good_sales_num" property="goodSalesNum" />
+        <result column="sales_rank" property="salesRank" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+                id,
+                bid,
+                date,
+                good_id,
+                good_sales_num
+    </sql>
+
+
+
+    <select id="countSalesRank" resultMap="BaseResultMap" parameterType="com.crud.demo.entity.RequestBrand">
+        SELECT good_id,good_sales_num, RANK() OVER(order by good_sales_num desc) as sales_rank from
+         (SELECT good_id, sum(good_sales_num) as good_sales_num
+                FROM daily_sales
+				WHERE bid = #{bid} and date between #{startDate} and #{endDate}
+				GROUP BY good_id) x
+    </select>
+
+
+</mapper>

@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: root
+    password: liutian
+    #    home liutian 3306 school 123456 3307
+    #url中database为对应的数据库名称
+    url: jdbc:mysql://localhost:3306/warehouse?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      connection-test-query: SELECT 1 FROM DUAL
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: SpringBootDemoHikariCP
+      max-lifetime: 60000
+      connection-timeout: 30000
+
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.crud.demo.entity
+
+
+#showSql
+logging:
+  level:
+    com.crud.demo.mapper: debug
+

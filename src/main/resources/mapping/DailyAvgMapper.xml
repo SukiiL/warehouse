@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crud.demo.mapper.DailyAvgMapper">
+
+
+    <select id="findPackAvg" resultType="com.crud.demo.entity.dailyAvg.ReturnAvg" parameterType="com.crud.demo.entity.RequestBrand">
+        SELECT bid,
+                ROUND(sum(total_weight)/sum(pack_num),2) as avgWeight,
+                ROUND(sum(total_price)/sum(pack_num),2) as avgPrice,
+                ROUND(sum(total_sku)/sum(pack_num),2) as avgSku,
+                ROUND(sum(total_good_quantity)/sum(pack_num),2) as avgGoodQuantity
+        FROM daily_total
+        WHERE bid = #{bid} and date between #{startDate} and #{endDate}
+        GROUP BY bid
+    </select>
+
+    <select id="countDailyGood" resultType="com.crud.demo.entity.dailyAvg.DailyGood" parameterType="com.crud.demo.entity.RequestBrand">
+        SELECT date,total_good_quantity as totalGoodQuantity
+        FROM daily_total
+        WHERE bid = #{bid} and date between #{startDate} and #{endDate}
+        ORDER BY totalGoodQuantity DESC
+    </select>
+
+</mapper>

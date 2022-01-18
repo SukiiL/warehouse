@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crud.demo.mapper.BrandMapper">
+
+    <resultMap id="BrandEntityMap" type="com.crud.demo.entity.Brand" >
+        <result column="bid" property="bid" />
+        <result column="brand_name" property="brandName" />
+        <result column="is_delete" property="isDelete" />
+    </resultMap>
+
+    <!--    根据bid删除商家-->
+    <delete id="deleteByBid" >
+        update brand SET is_delete = 1 where bid = #{bid}
+    </delete>
+
+    <!--    增/改商家-->
+    <insert id="insert" parameterType="java.util.List">
+        insert into brand
+        (bid,brand_name)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.bid},
+            #{item.brandName})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        brand_name = VALUES(brand_name)
+    </insert>
+
+
+</mapper>
