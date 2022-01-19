@@ -1,4 +1,4 @@
-package com.crud.demo.entity.dailyAvg;
+package com.crud.demo.entity.dailyPack;
 
 import lombok.Data;
 

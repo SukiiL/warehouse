@@ -1,9 +1,9 @@
-package com.crud.demo.entity.dailyAvg;
+package com.crud.demo.entity.dailySales;
 
 
+import com.crud.demo.entity.dailySales.DailyGood;
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 

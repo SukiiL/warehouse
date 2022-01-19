@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crud.demo.mapper.DailyPackMapper">
+
+    <resultMap id="BaseResultMap" type="com.crud.demo.entity.dailyPack.DailyMaterial" >
+        <result column="id" property="id" />
+        <result column="bid" property="bid" />
+        <result column="date" property="date" />
+        <result column="material_type_id" property="materialTypeId" />
+        <result column="material_total_quantity" property="materialQuantity" />
+    </resultMap>
+
+
+
+    <select id="countMaterialNum" resultMap="BaseResultMap" parameterType="com.crud.demo.entity.RequestBrand">
+        SELECT bid,material_type_id, material_total_quantity,
+			ROUND(material_total_quantity/(SELECT SUM(material_quantity) FROM daily_material
+			                            WHERE bid = #{bid} and date between #{startDate} and #{endDate})*100,1)
+			as materialPercent
+        from (SELECT bid,material_type_id, sum(material_quantity) as material_total_quantity
+            FROM daily_material
+            WHERE bid = #{bid} and date between #{startDate} and #{endDate}
+            GROUP BY material_type_id) x
+        ORDER BY material_total_quantity DESC
+    </select>
+
+
+    <select id="findPackAvg" resultType="com.crud.demo.entity.dailyPack.ReturnAvg" parameterType="com.crud.demo.entity.RequestBrand">
+        SELECT bid,
+                ROUND(sum(total_weight)/sum(pack_num),2) as avgWeight,
+                ROUND(sum(total_price)/sum(pack_num),2) as avgPrice,
+                ROUND(sum(total_sku)/sum(pack_num),2) as avgSku,
+                ROUND(sum(total_good_quantity)/sum(pack_num),2) as avgGoodQuantity
+        FROM daily_total
+        WHERE bid = #{bid} and date between #{startDate} and #{endDate}
+        GROUP BY bid
+    </select>
+
+
+    <select id="countSkuRank" resultType="com.crud.demo.entity.dailyPack.DailySku" parameterType="com.crud.demo.entity.RequestBrand">
+        SELECT bid, sku, packNum, RANK() OVER(order by packNum desc) as skuPackRank,
+			ROUND(packNum/(SELECT SUM(pack_num) FROM daily_sku
+			                            WHERE bid = #{bid} and date between #{startDate} and #{endDate})*100,1)
+			as skuPackPercent
+        from (SELECT bid,sku, sum(pack_num) as packNum
+            FROM daily_sku
+            WHERE bid = #{bid} and date between #{startDate} and #{endDate}
+            GROUP BY sku) x
+        ORDER BY packNum DESC
+    </select>
+
+
+
+</mapper>

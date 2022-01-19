@@ -1,8 +1,7 @@
-package com.crud.demo.entity;
+package com.crud.demo.entity.dailyPack;
 import lombok.Data;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
 
 @Data
 public class DailyMaterial implements Serializable {

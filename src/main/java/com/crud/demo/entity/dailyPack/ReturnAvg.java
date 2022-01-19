@@ -1,7 +1,6 @@
-package com.crud.demo.entity.dailyAvg;
+package com.crud.demo.entity.dailyPack;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
 
 import lombok.Data;
 
