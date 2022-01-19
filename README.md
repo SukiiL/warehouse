@@ -15,6 +15,9 @@ good表
 
 (3) 查询：按商家id查询  
 ### 2.商家出货包裹的统计  
+#### python脚本
+定时任务，每天统计系统当前日期前一天的所有销售情况并存入daily_sales、daily_total、daily_material、daily_sku这些daily表中
+
 #### 数据表  
 task表：打包的起止时间、订单状态  
 
@@ -53,3 +56,5 @@ daily_sales表：用作日统计销量数据
    * SpringBoot
    * Mybatis
    * Mysql8
+   * Navicat15
+   * Python3.8
