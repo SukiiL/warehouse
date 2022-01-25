@@ -23,11 +23,11 @@ spring:
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mapping/*.xml
-  type-aliases-package: com.crud.demo.entity
+  type-aliases-package: com.warehouse.entity
 
 
 #showSql
 logging:
   level:
-    com.crud.demo.mapper: debug
+    com.warehouse.mapper: debug
 

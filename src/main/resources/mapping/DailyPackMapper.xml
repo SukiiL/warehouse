@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.crud.demo.mapper.DailyPackMapper">
+<mapper namespace="com.warehouse.mapper.DailyPackMapper">
 
-    <resultMap id="BaseResultMap" type="com.crud.demo.entity.dailyPack.DailyMaterial" >
+    <resultMap id="BaseResultMap" type="com.warehouse.entity.dailyPack.DailyMaterial" >
         <result column="id" property="id" />
         <result column="bid" property="bid" />
         <result column="date" property="date" />
@@ -13,7 +13,7 @@
 
 
 
-    <select id="countMaterialNum" resultMap="BaseResultMap" parameterType="com.crud.demo.entity.RequestBrand">
+    <select id="countMaterialNum" resultMap="BaseResultMap" parameterType="com.warehouse.entity.RequestBrand">
         SELECT bid,material_type_id, material_total_quantity,
 			ROUND(material_total_quantity/(SELECT SUM(material_quantity) FROM daily_material
 			                            WHERE bid = #{bid} and date between #{startDate} and #{endDate})*100,1)
@@ -26,7 +26,7 @@
     </select>
 
 
-    <select id="findPackAvg" resultType="com.crud.demo.entity.dailyPack.DailyTotal" parameterType="com.crud.demo.entity.RequestBrand">
+    <select id="findPackAvg" resultType="com.warehouse.entity.dailyPack.DailyTotal" parameterType="com.warehouse.entity.RequestBrand">
         SELECT bid,
                 ROUND(sum(total_weight)/sum(pack_num),2) as avgWeight,
                 ROUND(sum(total_price)/sum(pack_num),2) as avgPrice,
@@ -38,7 +38,7 @@
     </select>
 
 
-    <select id="countSkuRank" resultType="com.crud.demo.entity.dailyPack.DailySku" parameterType="com.crud.demo.entity.RequestBrand">
+    <select id="countSkuRank" resultType="com.warehouse.entity.dailyPack.DailySku" parameterType="com.warehouse.entity.RequestBrand">
         SELECT bid, sku, packNum, RANK() OVER(order by packNum desc) as skuPackRank,
 			ROUND(packNum/(SELECT SUM(pack_num) FROM daily_sku
 			                            WHERE bid = #{bid} and date between #{startDate} and #{endDate})*100,1)
@@ -51,20 +51,20 @@
     </select>
 
 
-    <select id="countPackGood" resultType="com.crud.demo.entity.dailyPack.DailySku" parameterType="com.crud.demo.entity.RequestBrand">
+    <select id="countPackGood" resultType="com.warehouse.entity.dailyPack.DailySku" parameterType="com.warehouse.entity.RequestBrand">
         SELECT sku, ROUND(sum(good_num)/sum(pack_num),1) as packAvgGoodQuantity
         FROM daily_sku
         WHERE bid = #{bid} and date between #{startDate} and #{endDate}
         GROUP BY sku
     </select>
 
-    <select id="countAvgSku" resultType="com.crud.demo.entity.dailyPack.DailySku" parameterType="com.crud.demo.entity.RequestBrand">
+    <select id="countAvgSku" resultType="com.warehouse.entity.dailyPack.DailySku" parameterType="com.warehouse.entity.RequestBrand">
         SELECT ROUND(sum(sku * pack_num)/sum(pack_num),1) as avgSku
         FROM daily_sku
         WHERE bid = #{bid} and date between #{startDate} and #{endDate} and sku > 1
     </select>
 
-    <select id="goodMiscPortion" resultType="com.crud.demo.entity.dailySales.DailySales" parameterType="com.crud.demo.entity.RequestBrand">
+    <select id="goodMiscPortion" resultType="com.warehouse.entity.dailySales.DailySales" parameterType="com.warehouse.entity.RequestBrand">
         SELECT  good_name, good_id, sum(good_sales_num) as goodSalesNum,
                                     sum(misc_pack_quantity) as  miscPackQuantity,
                                     sum(pack_quantity) as  packQuantity,
@@ -76,7 +76,7 @@
 				LIMIT #{limit}
     </select>
 
-    <select id="packMiscPortion" resultType="com.crud.demo.entity.dailyPack.DailyTotal" parameterType="com.crud.demo.entity.RequestBrand">
+    <select id="packMiscPortion" resultType="com.warehouse.entity.dailyPack.DailyTotal" parameterType="com.warehouse.entity.RequestBrand">
         SELECT sum(pack_num) as packNum,
                 sum(misc_pack_num) as miscPackNum,
                 ROUND(sum(misc_pack_num)/sum(pack_num),2) as miscPackPortion

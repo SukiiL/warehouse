@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--用于指定当前映射文件和哪个接口进行映射-->
-<mapper namespace="com.crud.demo.mapper.GoodMapper">
+<mapper namespace="com.warehouse.mapper.GoodMapper">
 
-    <resultMap id="GoodEntityMap" type="com.crud.demo.entity.Good">
+    <resultMap id="GoodEntityMap" type="com.warehouse.entity.Good">
         <result column="gid" jdbcType="INTEGER" property="gid" />
         <result column="bid" jdbcType="INTEGER" property="bid" />
         <result column="name" jdbcType="VARCHAR" property="name" />
@@ -20,14 +20,14 @@
 
 
     <!--按bid查询商品-->
-    <select id="findByBid" resultType="com.crud.demo.entity.Good">
+    <select id="findByBid" resultType="com.warehouse.entity.Good">
         select gid, bid, name, good_id, tray, weight, length, width, height, price, is_delete
          from good
          where bid = #{bid} and is_delete = 0
     </select>
 
     <!--按gid查询商品-->
-    <select id="findByGid" resultType="com.crud.demo.entity.Good">
+    <select id="findByGid" resultType="com.warehouse.entity.Good">
         select gid, bid, name, good_id, tray, weight, length, width, height, price, is_delete
          from good
          where gid = #{gid} and is_delete = 0
