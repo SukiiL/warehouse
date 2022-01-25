@@ -1,7 +1,5 @@
 package com.crud.demo.entity.dailySales;
 
-
-import com.crud.demo.entity.dailySales.DailyGood;
 import lombok.Data;
 
 import java.util.ArrayList;

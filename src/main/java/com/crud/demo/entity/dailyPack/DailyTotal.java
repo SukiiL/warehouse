@@ -2,11 +2,13 @@ package com.crud.demo.entity.dailyPack;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 
 @Data
-public class ReturnAvg implements Serializable{
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class DailyTotal implements Serializable{
 
         private static final long serialVersionUID = 1L;
 
@@ -36,6 +38,21 @@ public class ReturnAvg implements Serializable{
          * 包裹商品平均数目
          */
         private BigDecimal avgGoodQuantity;
+
+        /**
+         * 日包裹总数
+         */
+        private Integer packNum;
+
+        /**
+         * 日杂单包裹总数
+         */
+        private Integer miscPackNum;
+
+        /**
+         * 杂单包裹占比
+         */
+        private BigDecimal miscPackPortion;
 
     }
 

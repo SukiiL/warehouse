@@ -69,4 +69,6 @@ public class DailySalesServiceImpl implements DailySalesService {
         returnInfo.setSdSales(sd);//标准偏差
         return returnInfo;
     }
+
+
 }

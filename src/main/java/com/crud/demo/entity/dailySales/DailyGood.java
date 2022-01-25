@@ -18,7 +18,7 @@ public class DailyGood implements Serializable {
 
 
     /**
-     * 包裹商品总数目
+     * 每日所售商品总数目
      */
     private Integer totalGoodQuantity;
 

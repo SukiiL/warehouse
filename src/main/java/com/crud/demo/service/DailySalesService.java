@@ -13,4 +13,6 @@ public interface DailySalesService {
     List<DailySales> countSalesRank(RequestBrand brandInfo);
 
     ReturnDailyGood countDailyGood(RequestBrand brandInfo);
+
+
 }

@@ -1,9 +1,8 @@
 package com.crud.demo.mapper;
 
-import com.crud.demo.entity.dailyPack.DailyMaterial;
+import com.crud.demo.entity.dailyPack.*;
 import com.crud.demo.entity.RequestBrand;
-import com.crud.demo.entity.dailyPack.DailySku;
-import com.crud.demo.entity.dailyPack.ReturnAvg;
+import com.crud.demo.entity.dailySales.DailySales;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +21,7 @@ public interface DailyPackMapper {
      * @param brandInfo
      * @return
      */
-    ReturnAvg findPackAvg(RequestBrand brandInfo);
+    DailyTotal findPackAvg(RequestBrand brandInfo);
 
 
 
@@ -41,4 +40,32 @@ public interface DailyPackMapper {
      */
     List<DailySku> countSkuRank(RequestBrand brandInfo);
 
+
+    /**
+     * 根据bid和date查找商家各sku数目下的商品数
+     * @param brandInfo
+     * @return
+     */
+    List<DailySku> countPackGood(RequestBrand brandInfo);
+
+    /**
+     * 根据bid和date查找商家sku > 1的包裹的平均sku数
+     * @param brandInfo
+     * @return
+     */
+    DailySku countAvgSku(RequestBrand brandInfo);
+
+    /**
+     * 根据bid，date和N查找商家每个商品杂单包裹比例
+     * @param brandInfo
+     * @return
+     */
+    List<DailySales> goodMiscPortion(RequestBrand brandInfo);
+
+    /**
+     * 根据bid，date查找商家杂单包裹比例
+     * @param brandInfo
+     * @return
+     */
+    DailyTotal packMiscPortion(RequestBrand brandInfo);
 }

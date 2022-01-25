@@ -5,6 +5,7 @@
 
     <resultMap id="BaseResultMap" type="com.crud.demo.entity.dailySales.DailySales" >
         <result column="id" property="id" />
+        <result column="good_name" property="goodName" />
         <result column="good_id" property="goodId" />
         <result column="good_sales_num" property="goodSalesNum" />
         <result column="sales_rank" property="salesRank" />
@@ -20,8 +21,8 @@
 
 
     <select id="countSalesRank" resultMap="BaseResultMap" parameterType="com.crud.demo.entity.RequestBrand">
-        SELECT good_id,good_sales_num, RANK() OVER(order by good_sales_num desc) as sales_rank from
-         (SELECT good_id, sum(good_sales_num) as good_sales_num
+        SELECT good_name, good_id,good_sales_num, RANK() OVER(order by good_sales_num desc) as sales_rank from
+         (SELECT good_name, good_id, sum(good_sales_num) as good_sales_num
                 FROM daily_sales
 				WHERE bid = #{bid} and date between #{startDate} and #{endDate}
 				GROUP BY good_id) x

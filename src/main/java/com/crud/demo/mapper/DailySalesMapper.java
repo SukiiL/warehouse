@@ -1,5 +1,6 @@
 package com.crud.demo.mapper;
 
+import com.crud.demo.entity.dailyPack.DailyTotal;
 import com.crud.demo.entity.dailySales.DailyGood;
 import com.crud.demo.entity.dailySales.DailySales;
 import com.crud.demo.entity.RequestBrand;
@@ -28,5 +29,7 @@ public interface DailySalesMapper {
      * @return
      */
     List<DailyGood> countDailyGood(RequestBrand brandInfo);
+
+
 
 }
