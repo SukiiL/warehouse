@@ -1,9 +1,10 @@
 package com.warehouse.service;
 
-import com.warehouse.entity.dailyPack.DailyMaterial;
 import com.warehouse.entity.RequestBrand;
+import com.warehouse.entity.dailyPack.DailyMaterial;
 import com.warehouse.entity.dailyPack.DailySku;
 import com.warehouse.entity.dailyPack.DailyTotal;
+import com.warehouse.entity.dailyPack.EfficiencyPerArea;
 import com.warehouse.entity.dailySales.ReturnMiscPortion;
 
 import java.util.List;
@@ -43,6 +44,8 @@ public interface DailyPackService {
     DailySku countAvgSku(RequestBrand brandInfo);
 
     ReturnMiscPortion countMiscPortion(RequestBrand brandInfo);
+
+    List<EfficiencyPerArea> countEfficiency(RequestBrand brandInfo);
 }
 
 

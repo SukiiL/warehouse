@@ -1,9 +1,10 @@
 package com.warehouse.controller;
 
-import com.warehouse.entity.dailyPack.DailyMaterial;
 import com.warehouse.entity.RequestBrand;
+import com.warehouse.entity.dailyPack.DailyMaterial;
 import com.warehouse.entity.dailyPack.DailySku;
 import com.warehouse.entity.dailyPack.DailyTotal;
+import com.warehouse.entity.dailyPack.EfficiencyPerArea;
 import com.warehouse.entity.dailySales.ReturnMiscPortion;
 import com.warehouse.service.DailyPackService;
 import com.warehouse.util.JsonResult;
@@ -85,6 +86,17 @@ public class DailyPackController extends BaseController{
     public JsonResult<ReturnMiscPortion> countMiscPortion(@RequestBody RequestBrand brandInfo){
         ReturnMiscPortion data = dailyPackService.countMiscPortion(brandInfo);
         JsonResult<ReturnMiscPortion> r = new JsonResult<>(OK,data);
+        r.setMessage("操作成功");
+        return r;
+    }
+
+    /**
+     * 根据bid,date,n查找商家平效
+     */
+    @RequestMapping(value = "/countEfficiency", method = RequestMethod.POST)
+    public JsonResult<List<EfficiencyPerArea>> countEfficiency(@RequestBody RequestBrand brandInfo){
+        List<EfficiencyPerArea> data = dailyPackService.countEfficiency(brandInfo);
+        JsonResult<List<EfficiencyPerArea>> r = new JsonResult<>(OK,data);
         r.setMessage("操作成功");
         return r;
     }

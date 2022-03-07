@@ -3,8 +3,9 @@ package com.warehouse.mapper;
 import com.warehouse.entity.RequestBrand;
 import com.warehouse.entity.dailyPack.DailyMaterial;
 import com.warehouse.entity.dailyPack.DailySku;
-import com.warehouse.entity.dailySales.DailySales;
 import com.warehouse.entity.dailyPack.DailyTotal;
+import com.warehouse.entity.dailyPack.EfficiencyPerArea;
+import com.warehouse.entity.dailySales.DailySales;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -70,4 +71,9 @@ public interface DailyPackMapper {
      * @return
      */
     DailyTotal packMiscPortion(RequestBrand brandInfo);
+
+    /**
+     * 根据bid，date查找商家平效
+     */
+    List<EfficiencyPerArea> countEfficiency(RequestBrand brandInfo);
 }

@@ -84,5 +84,14 @@
             WHERE bid = #{bid} and date between #{startDate} and #{endDate}
     </select>
 
+    <select id="countEfficiency" resultType="com.warehouse.entity.dailyPack.EfficiencyPerArea" parameterType="com.warehouse.entity.RequestBrand">
+        SELECT ROUND(AVG(a.pack_num)/b.area,2) AS efficiencyPerSquareMeter, b.start_date as startDate, b.end_date as endDate
+        FROM daily_total a JOIN brand_area b
+        ON (a.date BETWEEN  #{startDate} and #{endDate} and a.bid = #{bid} and
+        a.bid = b.bid and a.date BETWEEN b.start_date and  b.end_date)
+        GROUP BY startDate
+        order by startDate asc
+    </select>
+
 
 </mapper>

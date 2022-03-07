@@ -1,9 +1,10 @@
 package com.warehouse.service.impl;
 
-import com.warehouse.entity.dailyPack.DailyMaterial;
 import com.warehouse.entity.RequestBrand;
+import com.warehouse.entity.dailyPack.DailyMaterial;
 import com.warehouse.entity.dailyPack.DailySku;
 import com.warehouse.entity.dailyPack.DailyTotal;
+import com.warehouse.entity.dailyPack.EfficiencyPerArea;
 import com.warehouse.entity.dailySales.DailySales;
 import com.warehouse.entity.dailySales.ReturnMiscPortion;
 import com.warehouse.mapper.DailyPackMapper;
@@ -24,33 +25,28 @@ public class DailyPackServiceImpl implements DailyPackService {
     @Override
     public DailyTotal findPackAvg (RequestBrand brandInfo) {
         // 判断商家是否存在
-        DailyTotal avgInfo = dailyPackMapper.findPackAvg(brandInfo);
         //将当前商家数据返回
-        return avgInfo;
+        return dailyPackMapper.findPackAvg(brandInfo);
     }
 
     @Override
     public List<DailyMaterial> countMaterialNum(RequestBrand brandInfo){
-        List<DailyMaterial> selectRes = dailyPackMapper.countMaterialNum(brandInfo);
-        return selectRes;
+        return dailyPackMapper.countMaterialNum(brandInfo);
     }
 
     @Override
     public List<DailySku> countSkuRank(RequestBrand brandInfo) {
-        List<DailySku> selectRes = dailyPackMapper.countSkuRank(brandInfo);
-        return selectRes;
+        return dailyPackMapper.countSkuRank(brandInfo);
     }
 
     @Override
     public List<DailySku> countPackGood(RequestBrand brandInfo){
-        List<DailySku> selectRes = dailyPackMapper.countPackGood(brandInfo);
-        return selectRes;
+        return dailyPackMapper.countPackGood(brandInfo);
     }
 
     @Override
     public DailySku countAvgSku(RequestBrand brandInfo){
-        DailySku selectRes = dailyPackMapper.countAvgSku(brandInfo);
-        return selectRes;
+        return dailyPackMapper.countAvgSku(brandInfo);
 
     }
 
@@ -64,6 +60,20 @@ public class DailyPackServiceImpl implements DailyPackService {
 //        int n = brandInfo.getN();
 //        return salesInfo.size() <= n ? salesInfo : salesInfo.subList(0,n);
         return miscInfo;
+    }
+
+    @Override
+    public List<EfficiencyPerArea> countEfficiency(RequestBrand brandInfo){
+        List<EfficiencyPerArea> list = dailyPackMapper.countEfficiency(brandInfo);
+        int n = list.size();
+        if (n == 0) return list;
+        if(list.get(0).getStartDate() != brandInfo.getStartDate()){
+            list.get(0).setStartDate(brandInfo.getStartDate());
+        }
+        if(list.get(n-1).getEndDate() != brandInfo.getEndDate()){
+            list.get(n-1).setEndDate(brandInfo.getEndDate());
+        }
+        return list;
     }
 
 }
