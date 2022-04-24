@@ -1,7 +1,25 @@
 # 仓库管理系统  
 数据库：Mysql  
 
-所有接口均采用JSON格式request、response
+## 前端页面
+#### 1.支持模糊查询
+
+![image](https://user-images.githubusercontent.com/78685619/164955628-6e62b8a4-517e-49d0-97a2-53f700115ec0.png)
+
+ 
+#### 2.日期只能选当前日期以前的；选定起始日期后，结束日期只能选起始日期之后的；选定结束日期后，起始日期只能选结束日期之前的；
+
+![image](https://user-images.githubusercontent.com/78685619/164955624-c0d48f3f-0915-4cd3-ac41-165d7b479ce9.png)
+
+ 
+#### 3.展示结果
+
+![image](https://user-images.githubusercontent.com/78685619/164955621-75d37227-655a-4119-b329-fbdbb86fab6b.png)
+
+
+#### 4.占比分析和详情列表可以互相切换
+
+![image](https://user-images.githubusercontent.com/78685619/164955617-1ce22bfd-c83b-4966-a5bd-ea3ec07c77ea.png)
 
 ## 功能模块 
 ### 1.商品、商家的增删改查  
@@ -79,22 +97,4 @@ daily_sales表：用作日统计销量数据
    * Navicat15
    * Python3.8
 
-## 前端页面
-### 1.支持模糊查询
 
-![image](https://user-images.githubusercontent.com/78685619/164955628-6e62b8a4-517e-49d0-97a2-53f700115ec0.png)
-
- 
-### 2.日期只能选当前日期以前的；选定起始日期后，结束日期只能选起始日期之后的；选定结束日期后，起始日期只能选结束日期之前的；
-
-![image](https://user-images.githubusercontent.com/78685619/164955624-c0d48f3f-0915-4cd3-ac41-165d7b479ce9.png)
-
- 
-### 3.展示结果
-
-![image](https://user-images.githubusercontent.com/78685619/164955621-75d37227-655a-4119-b329-fbdbb86fab6b.png)
-
-
-### 4.占比分析和详情列表可以互相切换
-
-![image](https://user-images.githubusercontent.com/78685619/164955617-1ce22bfd-c83b-4966-a5bd-ea3ec07c77ea.png)
